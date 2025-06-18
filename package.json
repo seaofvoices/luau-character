@@ -1,0 +1,36 @@
+{
+  "name": "luau-character",
+  "version": "0.1.0",
+  "description": "A Luau library for Unicode character classification",
+  "license": "MIT",
+  "author": "jeparlefrancais <jeparlefrancais21@gmail.com>",
+  "homepage": "https://github.com/seaofvoices/luau-character#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seaofvoices/luau-character.git"
+  },
+  "keywords": [
+    "luau",
+    "unicode",
+    "text"
+  ],
+  "main": "src/init.luau",
+  "scripts": {
+    "build": "sh ./scripts/build.sh",
+    "clean": "rm -rf node_modules build temp",
+    "format": "stylua .",
+    "lint": "sh ./scripts/analyze.sh && selene src",
+    "lint:luau": "sh ./scripts/analyze.sh",
+    "lint:selene": "selene src",
+    "prepare": "npmluau",
+    "style-check": "stylua . --check",
+    "test:roblox": "sh ./scripts/roblox-test.sh",
+    "verify-pack": "yarn pack --dry-run"
+  },
+  "devDependencies": {
+    "@jsdotlua/jest": "^3.10.0",
+    "@jsdotlua/jest-globals": "^3.10.0",
+    "npmluau": "^0.1.2"
+  },
+  "packageManager": "yarn@4.9.2"
+}

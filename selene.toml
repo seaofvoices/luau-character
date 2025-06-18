@@ -1,0 +1,10 @@
+std = "selene_defs"
+
+[rules]
+global_usage = "allow"
+shadowing = "allow"
+# selene seems to be bugged on some valid unicode escapes
+bad_string_escape = "allow"
+
+[config]
+empty_if = { comments_count = true }
