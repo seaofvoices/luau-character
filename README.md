@@ -30,7 +30,11 @@ npm install luau-character
 
 ## Content
 
-The library include various functions that operates on strings. For strings longer than 1 character, only the first character is checked.
+**Conversion functions:**
+- [toLowercase](#tolowercase)
+- [toUppercase](#touppercase)
+
+**Classification functions:**
 
 - [isAscii](#isascii)
 - [isAlphabetic](#isalphabetic)
@@ -40,6 +44,18 @@ The library include various functions that operates on strings. For strings long
 - [isUppercase](#isuppercase)
 - [isControl](#iscontrol)
 - [isWhitespace](#iswhitespace)
+
+### toLowercase
+```luau
+character.toLowercase(str: string): string
+```
+Converts a string to lowercase. This function handles Unicode characters and can convert multi-character sequences.
+
+### toUppercase
+```luau
+character.toUppercase(str: string): string
+```
+Converts a string to uppercase. This function handles Unicode characters and can convert multi-character sequences.
 
 ### isAscii
 ```luau
