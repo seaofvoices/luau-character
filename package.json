@@ -1,7 +1,7 @@
 {
   "name": "luau-character",
-  "version": "0.1.0",
-  "description": "A Luau library for Unicode character classification",
+  "version": "0.2.0",
+  "description": "A Luau library for Unicode character classification and conversion",
   "license": "MIT",
   "author": "jeparlefrancais <jeparlefrancais21@gmail.com>",
   "homepage": "https://github.com/seaofvoices/luau-character#readme",
