@@ -100,9 +100,7 @@ local function shortOffsetRunHeaderPrefixSum(value: number): number
     return bit32.band(value, bit32.lshift(1, 21) - 1)
 end
 
-local function skipSearch(needle: string, shortOffsetRuns: { number }, offsets: { number }): boolean
-    local needle = utf8.codepoint(needle)
-
+local function skipSearch(needle: number, shortOffsetRuns: { number }, offsets: { number }): boolean
     local search = binarySeachByKey(shortOffsetRuns, bit32.lshift(needle, 11), function(value)
         return bit32.lshift(value, 11)
     end)
@@ -260,7 +258,7 @@ do
         0, 0, 0, 0, 5, 0, 0,
     }
 
-    function alphabetic.lookup(c: string): boolean
+    function alphabetic.lookup(c: number): boolean
         return skipSearch(c, SHORT_OFFSET_RUNS, OFFSETS)
     end
 end
@@ -274,7 +272,7 @@ do
     local OFFSETS = {
         0, 32, 95, 33, 0,
     }
-    function cc.lookup(c: string): boolean
+    function cc.lookup(c: number): boolean
         return skipSearch(c, SHORT_OFFSET_RUNS, OFFSETS)
     end
 end
@@ -380,9 +378,7 @@ do
         {5, 187}, {6, 78}, {7, 132},
     }
 
-    function lowercase.lookup(c: string): boolean
-        local char = utf8.codepoint(c)
-
+    function lowercase.lookup(char: number): boolean
         return bitsetSearch(
             char,
             BITSET_CHUNKS_MAP,
@@ -434,7 +430,7 @@ do
         86, 10, 134, 10, 1, 7, 0, 10, 0, 23, 0, 10, 0, 20, 12, 20, 108, 25, 0, 50, 0, 10, 0, 10, 0,
         10, 247, 10, 0, 9, 128, 10, 0, 59, 1, 3, 1, 4, 76, 45, 1, 15, 0, 13, 0, 10, 0,
     }
-    function n.lookup(c: string): boolean
+    function n.lookup(c: number): boolean
         return skipSearch(c, SHORT_OFFSET_RUNS, OFFSETS)
     end
 end
@@ -524,9 +520,7 @@ do
         {2, 146}, {2, 20}, {3, 146}, {3, 140}, {3, 134}, {4, 178}, {4, 171},
     }
 
-    function uppercase.lookup(c: string): boolean
-        local char = utf8.codepoint(c)
-
+    function uppercase.lookup(char: number): boolean
         return bitsetSearch(
             char,
             BITSET_CHUNKS_MAP,
@@ -552,9 +546,7 @@ do
         0, 0, 0, 0, 0, 0, 0, 0, 0,
     }
 
-    function whiteSpace.lookup(c: string): boolean
-        local char = utf8.codepoint(c)
-
+    function whiteSpace.lookup(char: number): boolean
         local shifted = bit32.rshift(char, 8)
 
         if shifted == 0 then

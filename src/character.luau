@@ -7,72 +7,96 @@ local uppercaseLookup = unicodeData.uppercase.lookup
 local controlLookup = unicodeData.cc.lookup
 local whitespaceLookup = unicodeData.whiteSpace.lookup
 
-local function isAscii(char: string): boolean
-    local code = utf8.codepoint(char)
-    return code <= 0x7f
-end
-
-local function isAlphabetic(char: string): boolean
-    local code = utf8.codepoint(char)
-    if
-        (code >= 65 and code <= 90)
-        or (code >= 97 and code <= 122)
-        or (code > 0x7f and alphabeticLookup(char))
-    then
-        return true
+local function isAscii(str: string): boolean
+    for _, code in utf8.codes(str) do
+        if code > 0x7f then
+            return false
+        end
     end
-    return false
+    return true
 end
 
-local function isNumeric(char: string): boolean
-    local code = utf8.codepoint(char)
-    if (code >= 48 and code <= 57) or (code > 0x7f and numericLookup(char)) then
-        return true
+local function isAlphabetic(str: string): boolean
+    for _, code in utf8.codes(str) do
+        if
+            not (
+                (code >= 65 and code <= 90)
+                or (code >= 97 and code <= 122)
+                or (code > 0x7f and alphabeticLookup(code))
+            )
+        then
+            return false
+        end
     end
-    return false
+
+    return true
 end
 
-local function isAlphaNumeric(char: string): boolean
-    local code = utf8.codepoint(char)
-    if
-        (code >= 65 and code <= 90)
-        or (code >= 97 and code <= 122)
-        or (code >= 48 and code <= 57)
-        or (code > 0x7f and (alphabeticLookup(char) or numericLookup(char)))
-    then
-        return true
+local function isNumeric(str: string): boolean
+    for _, code in utf8.codes(str) do
+        if not ((code >= 48 and code <= 57) or (code > 0x7f and numericLookup(code))) then
+            return false
+        end
     end
-    return false
+    return true
 end
 
-local function isLowercase(char: string): boolean
-    local code = utf8.codepoint(char)
-    if (code >= 97 and code <= 122) or (code > 0x7f and lowercaseLookup(char)) then
-        return true
+local function isAlphaNumeric(str: string): boolean
+    for _, code in utf8.codes(str) do
+        if
+            not (
+                (code >= 65 and code <= 90)
+                or (code >= 97 and code <= 122)
+                or (code >= 48 and code <= 57)
+                or (code > 0x7f and (alphabeticLookup(code) or numericLookup(code)))
+            )
+        then
+            return false
+        end
     end
-    return false
+    return true
 end
 
-local function isUppercase(char: string): boolean
-    local code = utf8.codepoint(char)
-    if (code >= 65 and code <= 90) or (code > 0x7f and uppercaseLookup(char)) then
-        return true
+local function isLowercase(str: string): boolean
+    for _, code in utf8.codes(str) do
+        if not ((code >= 97 and code <= 122) or (code > 0x7f and lowercaseLookup(code))) then
+            return false
+        end
     end
-    return false
+    return true
 end
 
-local function isControl(char: string): boolean
-    return controlLookup(char)
-end
-
-local function isWhitespace(char: string): boolean
-    local code = utf8.codepoint(char)
-    if code == 32 or (code >= 9 and code <= 13) then
-        return true
-    elseif code > 0x7f and whitespaceLookup(char) then
-        return true
+local function isUppercase(str: string): boolean
+    for _, code in utf8.codes(str) do
+        if not ((code >= 65 and code <= 90) or (code > 0x7f and uppercaseLookup(code))) then
+            return false
+        end
     end
-    return false
+    return true
+end
+
+local function isControl(str: string): boolean
+    for _, code in utf8.codes(str) do
+        if not controlLookup(code) then
+            return false
+        end
+    end
+    return true
+end
+
+local function isWhitespace(str: string): boolean
+    for _, code in utf8.codes(str) do
+        if
+            not (
+                code == 32
+                or (code >= 9 and code <= 13)
+                or (code > 0x7f and whitespaceLookup(code))
+            )
+        then
+            return false
+        end
+    end
+    return true
 end
 
 local function toLowercase(str: string): string

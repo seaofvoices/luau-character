@@ -12,7 +12,7 @@
 
 # luau-character
 
-A Luau library for Unicode character classification. This library is based on the Rust implementation of the `unicode` core library.
+A Luau library for Unicode character classification and conversion. This library is based on the Rust implementation of the `unicode` core library.
 
 ## Installation
 
@@ -35,7 +35,6 @@ npm install luau-character
 - [toUppercase](#touppercase)
 
 **Classification functions:**
-
 - [isAscii](#isascii)
 - [isAlphabetic](#isalphabetic)
 - [isNumeric](#isnumeric)
@@ -59,51 +58,51 @@ Converts a string to uppercase. This function handles Unicode characters and can
 
 ### isAscii
 ```luau
-character.isAscii(char: string): boolean
+character.isAscii(str: string): boolean
 ```
-Checks if a character is within the ASCII range.
+Checks if all characters in the string are within the ASCII range. Returns true for empty strings.
 
 ### isAlphabetic
 ```luau
-character.isAlphabetic(char: string): boolean
+character.isAlphabetic(str: string): boolean
 ```
-Checks if a character is alphabetic.
+Checks if all characters in the string are alphabetic. Returns true for empty strings.
 
 ### isNumeric
 ```luau
-character.isNumeric(char: string): boolean
+character.isNumeric(str: string): boolean
 ```
-Checks if a character is numeric.
+Checks if all characters in the string are numeric. Returns true for empty strings.
 
 ### isAlphaNumeric
 ```luau
-character.isAlphaNumeric(char: string): boolean
+character.isAlphaNumeric(str: string): boolean
 ```
-Checks if a character is either alphabetic or numeric.
+Checks if all characters in the string are either alphabetic or numeric. Returns true for empty strings.
 
 ### isLowercase
 ```luau
-character.isLowercase(char: string): boolean
+character.isLowercase(str: string): boolean
 ```
-Checks if a character is lowercase.
+Checks if all characters in the string are lowercase. Returns true for empty strings.
 
 ### isUppercase
 ```luau
-character.isUppercase(char: string): boolean
+character.isUppercase(str: string): boolean
 ```
-Checks if a character is uppercase.
+Checks if all characters in the string are uppercase. Returns true for empty strings.
 
 ### isControl
 ```luau
-character.isControl(char: string): boolean
+character.isControl(str: string): boolean
 ```
-Checks if a character is a control character.
+Checks if all characters in the string are control characters. Returns true for empty strings.
 
 ### isWhitespace
 ```luau
-character.isWhitespace(char: string): boolean
+character.isWhitespace(str: string): boolean
 ```
-Checks if a character is a whitespace character.
+Checks if all characters in the string are whitespace characters. Returns true for empty strings.
 
 ## License
 
